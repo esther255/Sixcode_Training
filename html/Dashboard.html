@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SixCode Admin Dashboard</title>
+  <link rel="stylesheet" href="../css/Dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <aside class="sidebar">
+      <h2>SixCode</h2>
+      <nav aria-label="Main navigation">
+        <a href="#overview" class="active">Overview</a>
+        <a href="#students">Students</a>
+        <a href="#courses">Courses</a>
+        <a href="#tasks">Tasks</a>
+      </nav>
+    </aside>
+
+    <main class="main-content" id="overview">
+
+      <header class="topbar">
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p>Welcome back! Here's your academy overview.</p>
+        </div>
+        <button type="button">View report</button>
+      </header>
+
+      <section class="dashboard-cards" aria-label="Summary">
+        <article class="card">
+          <p>Total Students</p>
+          <h2>248</h2>
+          <span>+12 this month</span>
+        </article>
+
+        <article class="card">
+          <p>Active Courses</p>
+          <h2>12</h2>
+          <span>Across all programs</span>
+        </article>
+
+        <article class="card">
+          <p>Pending Tasks</p>
+          <h2>36</h2>
+          <span>Needs attention</span>
+        </article>
+
+        <article class="card">
+          <p>Completion Rate</p>
+          <h2>78%</h2>
+          <span>+5% this month</span>
+        </article>
+      </section>
+
+      <section class="activity-panel" id="students">
+        <h2>Recent Student Activity</h2>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Student</th>
+                <th scope="col">Course</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Alice</td>
+                <td>HTML & CSS</td>
+                <td><span class="status complete">Complete</span></td>
+              </tr>
+              <tr>
+                <td>Brian</td>
+                <td>JavaScript</td>
+                <td><span class="status pending">Pending</span></td>
+              </tr>
+              <tr>
+                <td>Chantal</td>
+                <td>CSS Grid</td>
+                <td><span class="status progress">In progress</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>
+        SixCode Academy · Admin Dashboard
+      </footer>
+
+    </main>
+  </div>
+
+</body>
+</html>
