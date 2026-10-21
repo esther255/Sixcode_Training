@@ -3,14 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Document of SixCode Training</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <li class=""><a href="./html/practice.html">Contact</a></li>
-                <li class=""><a href="./html/practice.html">Tables</a></li>
-                <li class=""><a href="./html/practice.html">Dashboard</a></li>
-                <li class=""><a href="./html/practice.html">Javascript</a></li>
+
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">S</span>
+            SixCode Training
+        </a>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="./html/Contact.html">Contact</a></li>
+                <li><a href="./html/Table.html">Table</a></li>
+                <li><a href="./html/Dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
     </header>
+
+    <main>
+        <section class="hero">
+            <p class="subtitle">WELCOME TO  My learning Journey</p>
+
+            <h1>Learn. Build. Skills.</h1>
+
+            <p class="description">
+                Explore my web development projects as I learn
+                HTML, CSS, and JavaScript.
+            </p>
+
+            <a href="#projects" class="btn">Explore Projects ↓</a>
+        </section>
+
+        <section class="projects" id="projects">
+            <h2>My Projects</h2>
+            <p class="section-description">
+                Choose a page to explore.
+            </p>
+
+            <div class="project-grid">
+
+                <a href="./html/Contact.html" class="project-card">
+                    <span class="icon contact-icon">✉</span>
+                    <h3>Contact</h3>
+                    <p>Connect and explore the contact page.</p>
+                    <span class="card-link">Visit Page →</span>
+                </a>
+
+                <a href="./html/Table.html" class="project-card">
+                    <span class="icon table-icon">▦</span>
+                    <h3>Pricing Table</h3>
+                    <p>Explore the membership plans and pricing.</p>
+                    <span class="card-link">Visit Page →</span>
+                </a>
+
+                <a href="./html/Dashboard.html" class="project-card">
+                    <span class="icon dashboard-icon">▥</span>
+                    <h3>Dashboard</h3>
+                    <p>View the admin dashboard project.</p>
+                    <span class="card-link">Visit Page →</span>
+                </a>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 SixCode Academy | My Learning Journey</p>
+    </footer>
+
 </body>
 </html>
