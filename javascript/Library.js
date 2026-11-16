@@ -1,11 +1,13 @@
 
-// Array to store all books
+// 1. ARRAY TO STORE ALL BOOKS
+
 const myLibrary = [];
 
-// Book class
+// 2. BOOK CLASS
+
 class Book {
-  constructor(title, author, pages, read) {
-    this.id = crypto.randomUUID();
+  constructor(title, author, pages, read, id = crypto.randomUUID()) {
+    this.id = id;
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -23,16 +25,62 @@ class Book {
   }
 }
 
-// Add a new book to the library
+// 3. SAVE LIBRARY TO LOCAL STORAGE
+
+function saveLibrary() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+// 4. LOAD LIBRARY FROM LOCAL STORAGE
+
+function loadLibrary() {
+  const savedBooks = localStorage.getItem("myLibrary");
+
+  if (savedBooks === null) {
+    return false;
+  }
+
+  try {
+    const books = JSON.parse(savedBooks);
+
+    if (!Array.isArray(books)) {
+      return false;
+    }
+
+    books.forEach((book) => {
+      myLibrary.push(
+        new Book(
+          book.title,
+          book.author,
+          book.pages,
+          book.read,
+          book.id
+        )
+      );
+    });
+
+    return true;
+
+  } catch (error) {
+    console.error("Could not load saved books:", error);
+    return false;
+  }
+}
+
+// 5. ADD BOOK TO LIBRARY
+
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
 
   myLibrary.push(book);
 
+  saveLibrary();
+
   return book;
 }
 
-// Remove a book using its ID
+// 6. REMOVE BOOK FROM LIBRARY
+
 function removeBook(id) {
   const index = myLibrary.findIndex(
     (book) => book.id === id
@@ -40,16 +88,20 @@ function removeBook(id) {
 
   if (index !== -1) {
     myLibrary.splice(index, 1);
+
+    saveLibrary();
   }
 }
 
-// DOM elements
+// 7. DOM ELEMENTS
+
 const libraryEl = document.getElementById("library");
 const emptyMessage = document.getElementById("empty-message");
 const dialog = document.getElementById("book-dialog");
-const form = document.getElementById("book-form");
+const form = document.getElementById("book-form")
 
-// Create a book card
+// 8. CREATE BOOK CARD
+
 function createCard(book) {
   const card = document.createElement("article");
 
@@ -73,6 +125,7 @@ function createCard(book) {
   pages.textContent = `${book.pages} pages`;
 
   const status = document.createElement("p");
+
   status.textContent = book.read
     ? "Status: Read ✔"
     : "Status: Not read yet";
@@ -81,16 +134,20 @@ function createCard(book) {
   buttons.classList.add("buttons");
 
   const toggleBtn = document.createElement("button");
+
   toggleBtn.type = "button";
   toggleBtn.dataset.action = "toggle";
+
   toggleBtn.textContent = book.read
     ? "Mark unread"
     : "Mark read";
 
   const removeBtn = document.createElement("button");
+
   removeBtn.type = "button";
   removeBtn.dataset.action = "remove";
   removeBtn.classList.add("remove");
+
   removeBtn.textContent = "Remove";
 
   buttons.append(toggleBtn, removeBtn);
@@ -100,29 +157,34 @@ function createCard(book) {
   return card;
 }
 
-// Display all books
+// 9. DISPLAY BOOK
+
 function displayBooks() {
   libraryEl.replaceChildren(...myLibrary.map(createCard));
 
   emptyMessage.hidden = myLibrary.length > 0;
 }
 
-// Open the dialog
+// 10. OPEN DIALOG
+
 document
   .getElementById("new-book-btn")
   .addEventListener("click", () => {
     form.reset();
+
     dialog.showModal();
   });
 
-// Close the dialog
+// 11. CLOSE DIALOG
+
 document
   .getElementById("cancel-btn")
   .addEventListener("click", () => {
     dialog.close();
   });
 
-// Add a book when the form is submitted
+// 12. ADD BOOK WHEN FORM IS SUBMITTED
+
 form.addEventListener("submit", () => {
   const data = new FormData(form);
 
@@ -136,7 +198,8 @@ form.addEventListener("submit", () => {
   displayBooks();
 });
 
-// Handle button clicks using event delegation
+// 13. HANDLE REMOVE AND TOGGLE BUTTONS
+
 libraryEl.addEventListener("click", (event) => {
   const button = event.target.closest("button[data-action]");
 
@@ -152,15 +215,25 @@ libraryEl.addEventListener("click", (event) => {
 
     if (book) {
       book.toggleRead();
+
+      saveLibrary();
     }
   }
 
   displayBooks();
 });
 
-// Add example books
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
-addBookToLibrary("Clean Code", "Robert C. Martin", 464, false);
+// 14. INITIALIZE LIBRARY
 
-// Initial display
+// First, load previously saved books
+const hasSavedLibrary = loadLibrary();
+
+// Only add example books if this is the first visit
+if (!hasSavedLibrary) {
+  addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, true);
+
+  addBookToLibrary("Clean Code", "Robert C. Martin", 464, false);
+}
+
+// Display books on the page
 displayBooks();
